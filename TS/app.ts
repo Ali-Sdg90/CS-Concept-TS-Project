@@ -26,13 +26,6 @@ const getData = async () => {
     });
 };
 
-const hi = async () => {
-    console.log("HELLO");
-    console.log(await getData());
-};
-
-hi();
-
 interface Iitem {
     id: number;
     title: string;
@@ -65,10 +58,10 @@ class Items implements Iitem {
             <div class="item-box">
                 <img class="item-image" src="${this.image}" alt="item-image" />
 
-                <div class="item-title">${this.title}</div>
+                <div class="item-title" title=${this.title}>${this.title}</div>
 
                 <div class="item-info">
-                    <div class="item-price">${this.price}</div>
+                    <div class="item-price">${this.price} $</div>
                     <div class="item-rating">${this.rating.rate}/5</div>
                 </div>
 
@@ -84,19 +77,6 @@ const addCards = async () => {
     const items: Iitem[] = (await getData()) as Iitem[];
 
     const itemClasses: Items[] = [];
-
-    // for (let i in items) {
-    //     const item = items[i];
-    //     itemClasses[i] = new Items(
-    //         item.id,
-    //         item.title,
-    //         item.price,
-    //         item.description,
-    //         item.category,
-    //         item.image,
-    //         item.rating
-    //     );
-    // }
 
     itemSection.innerHTML = "";
 

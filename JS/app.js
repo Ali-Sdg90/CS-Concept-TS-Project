@@ -11,11 +11,6 @@ const getData = async () => {
         }
     });
 };
-const hi = async () => {
-    console.log("HELLO");
-    console.log(await getData());
-};
-hi();
 class Items {
     id;
     title;
@@ -38,10 +33,10 @@ class Items {
             <div class="item-box">
                 <img class="item-image" src="${this.image}" alt="item-image" />
 
-                <div class="item-title">${this.title}</div>
+                <div class="item-title" title=${this.title}>${this.title}</div>
 
                 <div class="item-info">
-                    <div class="item-price">${this.price}</div>
+                    <div class="item-price">${this.price} $</div>
                     <div class="item-rating">${this.rating.rate}/5</div>
                 </div>
 

@@ -10,95 +10,152 @@ body {
   background: #222;
   color: white;
   font-family: sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .page-header {
-  border: 1px solid red;
   height: 150px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: 22px;
+  border-bottom: 2px solid #979797;
+  text-shadow: 3px 0 rgba(98, 0, 255, 0.25), -3px 0 rgba(255, 0, 0, 0.25);
 }
 
 .page-main {
-  border: 1px solid blue;
   display: grid;
   grid-template-columns: 4fr 1fr;
+  min-height: calc(100vh - 210px);
 }
 .page-main .left-section .sort-section {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
   align-items: center;
-  gap: 30px;
-  border: 1px solid greenyellow;
-  padding: 0 20px;
+  gap: 10px;
+  background-color: #444;
+  padding: 4px 5px;
+  border-bottom: 2px solid #979797;
 }
 .page-main .left-section .sort-section .sort-btn {
-  padding: 10px;
-  border: 1px solid rgb(60, 60, 60);
-  background-color: #121212;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #353535;
+  width: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.page-main .left-section .sort-section .sort-btn:hover {
+  background-color: #3a3a3a;
+}
+.page-main .left-section .sort-section .sort-btn:active {
+  background-color: #353535;
 }
 .page-main .left-section .items-section {
-  border: 1px solid pink;
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   padding: 30px;
   gap: 30px;
 }
 .page-main .left-section .items-section .item-box {
-  border: 1px solid rgb(124, 124, 124);
+  border: 1px solid rgb(88, 88, 88);
   width: 250px;
   height: 250px;
   border-radius: 5px;
   background-color: #111;
-  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.149);
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.17);
+  overflow: hidden;
+  cursor: pointer;
 }
 .page-main .left-section .items-section .item-box .item-image {
-  border: 1px solid yellow;
   width: 100%;
   height: 155px;
   display: block;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background: white;
+  padding: 10px;
 }
 .page-main .left-section .items-section .item-box .item-title {
-  padding: 5px;
+  padding: 8px 8px 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 20px;
 }
 .page-main .left-section .items-section .item-box .item-info {
-  border: 1px solid blue;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 10px 8px 3px;
+}
+.page-main .left-section .items-section .item-box .item-info .item-price {
+  font-size: 16px;
 }
 .page-main .left-section .items-section .item-box .item-category {
   display: inline-block;
   background-color: #333;
   padding: 3px 5px;
-  margin: 5px;
+  margin: 5px 8px;
   border-radius: 5px;
+  font-size: 12px;
+}
+.page-main .left-section .items-section .loading-list {
+  font-size: 44px;
+  margin-top: 50px;
+  font-weight: 600;
 }
 .page-main .right-section {
-  border: 1px solid yellow;
+  border-left: 2px solid #979797;
+}
+.page-main .right-section .category-title {
+  background: #151515;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
+  padding: 16px;
+  font-size: 20px;
+}
+.page-main .right-section .category-item {
+  background: #333;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  margin-top: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.page-main .right-section .category-item:hover {
+  background: #3e3e3e;
+}
+.page-main .right-section .category-item:active {
+  background: #383838;
 }
 
 .page-footer {
   background: #0d0d0d;
+  height: 60px;
 }
 .page-footer .footer-link {
   color: white;
   text-decoration: none;
-  border: 1px solid red;
+  border-top: 2px solid #979797;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
