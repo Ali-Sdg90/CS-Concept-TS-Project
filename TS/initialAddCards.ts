@@ -6,6 +6,7 @@ const addCards = async () => {
     itemSection.innerHTML = "";
 
     items.map((item, index) => {
+        // Add classes into itemClasses array
         itemClasses[index] = new Items(
             item.id,
             item.title,
@@ -16,6 +17,7 @@ const addCards = async () => {
             item.rating
         );
 
+        // Add Initial items to HTML
         itemSection.innerHTML += itemClasses[index].createCard();
     });
 

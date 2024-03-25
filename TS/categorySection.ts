@@ -6,6 +6,7 @@ catBtnsArray.map((catBtn) => {
     catBtn.addEventListener("click", () => {
         console.log("=>", catBtn.textContent);
 
+        // Reset sotBtn arrows
         namePosition = sortBtnPositionHandler(2, 0);
         pricePosition = sortBtnPositionHandler(2, 1);
         ratePosition = sortBtnPositionHandler(2, 2);
@@ -17,6 +18,7 @@ catBtnsArray.map((catBtn) => {
             return itemClass.category === catBtn.textContent?.toLowerCase();
         });
 
+        // Reset selected category btn
         if (!catBtn.classList.contains("selected-catbtn")) {
             catBtnsArray.map((catBtn) => {
                 catBtn.classList.remove("selected-catbtn");
@@ -31,6 +33,7 @@ catBtnsArray.map((catBtn) => {
 
         itemSection.innerHTML = "";
 
+        // Add categoryItem to HTML
         for (let categoryItem in categoryItems) {
             itemSection.innerHTML += categoryItems[categoryItem].createCard();
         }

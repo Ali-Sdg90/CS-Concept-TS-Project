@@ -1,3 +1,4 @@
+// Sort number[] or string[] function
 const sortFunc = (
     sortType: "name" | "price" | "rating",
     itemArray: (string | number | null)[]
@@ -22,7 +23,6 @@ const sortItemsFunc = (
     itemPosition: number
 ) => {
     const itemArray = categoryItems.map((card) => {
-        card.title;
         switch (sortType) {
             case "name":
                 return card.title;
@@ -39,6 +39,7 @@ const sortItemsFunc = (
 
     console.log(">>", itemPosition);
 
+    // Different type of sort items (decrease, increase, normal)
     switch (itemPosition) {
         case 1:
             sortedCardsItem = sortFunc(sortType, itemArray);
@@ -80,6 +81,7 @@ const sortItemsFunc = (
     );
 };
 
+// Set different sort indicators for sort btns
 const sortBtnPositionHandler = (
     itemPosition: number,
     sortArrowIndex: number
@@ -120,6 +122,7 @@ sortBtnsArray.map((sortBtn, index) => {
             case 0:
                 console.log("=> Name");
 
+                // Reset other sort-btn-positions
                 namePosition = sortBtnPositionHandler(namePosition, 0);
                 pricePosition = sortBtnPositionHandler(2, 1);
                 ratePosition = sortBtnPositionHandler(2, 2);

@@ -13,7 +13,6 @@ const sortFunc = (sortType, itemArray) => {
 };
 const sortItemsFunc = (sortType, itemPosition) => {
     const itemArray = categoryItems.map((card) => {
-        card.title;
         switch (sortType) {
             case "name":
                 return card.title;
