@@ -73,10 +73,10 @@ class Items implements Iitem {
 
 const itemSection = document.querySelector(".items-section") as HTMLElement;
 
+const itemClasses: Items[] = [];
+
 const addCards = async () => {
     const items: Iitem[] = (await getData()) as Iitem[];
-
-    const itemClasses: Items[] = [];
 
     itemSection.innerHTML = "";
 
@@ -96,3 +96,58 @@ const addCards = async () => {
 };
 
 addCards();
+
+// ICARUS Easter Egg :)
+const ICARUSs = document.querySelectorAll(".ICARUS") as NodeListOf<HTMLElement>;
+
+ICARUSs.forEach((ICARUS) => {
+    ICARUS.addEventListener("click", () => {
+        if (ICARUS.classList.contains("ICARUS")) {
+            console.log("Aloha!");
+
+            ICARUS.setAttribute(
+                "href",
+                "https://also-ali-sdg90.github.io/ICARUS/"
+            );
+            ICARUS.classList.remove("ICARUS");
+
+            setTimeout(() => {
+                ICARUS.removeAttribute("href");
+            }, 0);
+        }
+    });
+});
+
+const catBtns = document.querySelectorAll(".category-item");
+
+const catBtnsArray = Array.from(catBtns);
+
+catBtnsArray.map((catBtn) => {
+    catBtn.addEventListener("click", () => {
+        console.log("=>", catBtn.textContent);
+        const categoryItems = itemClasses.filter((itemClass) => {
+            if (catBtn.classList.contains("selected-catbtn")) {
+                return itemClass.category;
+            }
+            return itemClass.category === catBtn.textContent?.toLowerCase();
+        });
+
+        if (!catBtn.classList.contains("selected-catbtn")) {
+            catBtnsArray.map((catBtn) => {
+                catBtn.classList.remove("selected-catbtn");
+            });
+
+            catBtn.classList.add("selected-catbtn");
+        } else {
+            catBtnsArray.map((catBtn) => {
+                catBtn.classList.remove("selected-catbtn");
+            });
+        }
+
+        itemSection.innerHTML = "";
+
+        for (let categoryItem in categoryItems) {
+            itemSection.innerHTML += categoryItems[categoryItem].createCard();
+        }
+    });
+});
