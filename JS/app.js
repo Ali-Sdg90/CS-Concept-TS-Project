@@ -47,6 +47,7 @@ class Items {
 }
 const itemSection = document.querySelector(".items-section");
 const itemClasses = [];
+let categoryItems = [];
 const addCards = async () => {
     const items = (await getData());
     itemSection.innerHTML = "";
@@ -54,6 +55,7 @@ const addCards = async () => {
         itemClasses[index] = new Items(item.id, item.title, item.price, item.description, item.category, item.image, item.rating);
         itemSection.innerHTML += itemClasses[index].createCard();
     });
+    categoryItems = itemClasses;
 };
 addCards();
 const ICARUSs = document.querySelectorAll(".ICARUS");
@@ -70,11 +72,13 @@ ICARUSs.forEach((ICARUS) => {
     });
 });
 const catBtns = document.querySelectorAll(".category-item");
-let categoryItems;
 const catBtnsArray = Array.from(catBtns);
 catBtnsArray.map((catBtn) => {
     catBtn.addEventListener("click", () => {
         console.log("=>", catBtn.textContent);
+        namePosition = sortBtnPositionHandler(2, 0);
+        pricePosition = sortBtnPositionHandler(2, 1);
+        ratePosition = sortBtnPositionHandler(2, 2);
         categoryItems = itemClasses.filter((itemClass) => {
             if (catBtn.classList.contains("selected-catbtn")) {
                 return itemClass.category;
@@ -98,7 +102,19 @@ catBtnsArray.map((catBtn) => {
         }
     });
 });
-const sortFunction = (sortType) => {
+const sortFunc = (sortType, itemArray) => {
+    let sortedCardsItem;
+    if (sortType === "name") {
+        sortedCardsItem = itemArray.sort();
+    }
+    else {
+        sortedCardsItem = itemArray.sort((a, b) => {
+            return a - b;
+        });
+    }
+    return sortedCardsItem;
+};
+const sortItemsFunc = (sortType, itemPosition) => {
     const itemArray = categoryItems.map((card) => {
         card.title;
         switch (sortType) {
@@ -113,13 +129,17 @@ const sortFunction = (sortType) => {
         }
     });
     let sortedCardsItem;
-    if (sortType === "name") {
-        sortedCardsItem = itemArray.sort();
-    }
-    else {
-        sortedCardsItem = itemArray.sort((a, b) => {
-            return a - b;
-        });
+    console.log(">>", itemPosition);
+    switch (itemPosition) {
+        case 1:
+            sortedCardsItem = sortFunc(sortType, itemArray);
+            break;
+        case 2:
+            sortedCardsItem = sortFunc(sortType, itemArray).reverse();
+            break;
+        default:
+            sortedCardsItem = itemArray;
+            break;
     }
     console.log("sortedCardsItem >>", sortedCardsItem);
     const sortedItems = sortedCardsItem.map((sortedCardItem) => {
@@ -140,22 +160,54 @@ const sortFunction = (sortType) => {
     itemSection.innerHTML = "";
     sortedItemOutputs.map((sortedItemOutput) => (itemSection.innerHTML += sortedItemOutput));
 };
+const sortBtnPositionHandler = (itemPosition, sortArrowIndex) => {
+    if (itemPosition === 3) {
+        itemPosition = 0;
+    }
+    switch (++itemPosition) {
+        case 1:
+            sortArrow[sortArrowIndex].textContent = "⇓";
+            break;
+        case 2:
+            sortArrow[sortArrowIndex].textContent = "⇑";
+            break;
+        case 3:
+            sortArrow[sortArrowIndex].textContent = " ";
+            break;
+        default:
+            break;
+    }
+    return itemPosition;
+};
 const sortBtns = document.querySelectorAll(".sort-btn");
 const sortBtnsArray = Array.from(sortBtns);
+const sortArrow = document.querySelectorAll(".sort-arrow");
+let namePosition = 0;
+let pricePosition = 0;
+let ratePosition = 0;
 sortBtnsArray.map((sortBtn, index) => {
     sortBtn.addEventListener("click", () => {
         switch (index) {
             case 0:
                 console.log("=> Name");
-                sortFunction("name");
+                namePosition = sortBtnPositionHandler(namePosition, 0);
+                pricePosition = sortBtnPositionHandler(2, 1);
+                ratePosition = sortBtnPositionHandler(2, 2);
+                sortItemsFunc("name", namePosition);
                 break;
             case 1:
                 console.log("=> Price");
-                sortFunction("price");
+                namePosition = sortBtnPositionHandler(2, 0);
+                pricePosition = sortBtnPositionHandler(pricePosition, 1);
+                ratePosition = sortBtnPositionHandler(2, 2);
+                sortItemsFunc("price", pricePosition);
                 break;
             case 2:
                 console.log("=> Rating");
-                sortFunction("rating");
+                namePosition = sortBtnPositionHandler(2, 0);
+                pricePosition = sortBtnPositionHandler(2, 1);
+                ratePosition = sortBtnPositionHandler(ratePosition, 2);
+                sortItemsFunc("rating", ratePosition);
                 break;
             default:
                 break;

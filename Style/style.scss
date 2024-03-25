@@ -54,14 +54,13 @@ body {
             background-color: #4e4e4e;
             padding: 4px 5px;
             border-bottom: 2px solid #979797;
-            // position: sticky;
-            // top: -1px;
 
             .sort-btn {
                 padding: 8px;
                 border: 1px solid rgba(0, 0, 0, 0.2);
                 background-color: #353535;
-                width: 100px;
+                width: 110px;
+                height: 36px;
                 display: flex;
                 flex-flow: row nowrap;
                 justify-content: center;
