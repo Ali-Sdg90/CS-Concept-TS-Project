@@ -70,11 +70,12 @@ ICARUSs.forEach((ICARUS) => {
     });
 });
 const catBtns = document.querySelectorAll(".category-item");
+let categoryItems;
 const catBtnsArray = Array.from(catBtns);
 catBtnsArray.map((catBtn) => {
     catBtn.addEventListener("click", () => {
         console.log("=>", catBtn.textContent);
-        const categoryItems = itemClasses.filter((itemClass) => {
+        categoryItems = itemClasses.filter((itemClass) => {
             if (catBtn.classList.contains("selected-catbtn")) {
                 return itemClass.category;
             }
@@ -94,6 +95,70 @@ catBtnsArray.map((catBtn) => {
         itemSection.innerHTML = "";
         for (let categoryItem in categoryItems) {
             itemSection.innerHTML += categoryItems[categoryItem].createCard();
+        }
+    });
+});
+const sortFunction = (sortType) => {
+    const itemArray = categoryItems.map((card) => {
+        card.title;
+        switch (sortType) {
+            case "name":
+                return card.title;
+            case "price":
+                return card.price;
+            case "rating":
+                return card.rating.rate;
+            default:
+                return null;
+        }
+    });
+    let sortedCardsItem;
+    if (sortType === "name") {
+        sortedCardsItem = itemArray.sort();
+    }
+    else {
+        sortedCardsItem = itemArray.sort((a, b) => {
+            return a - b;
+        });
+    }
+    console.log("sortedCardsItem >>", sortedCardsItem);
+    const sortedItems = sortedCardsItem.map((sortedCardItem) => {
+        return categoryItems.filter((itemClass) => {
+            switch (sortType) {
+                case "name":
+                    return itemClass.title === sortedCardItem;
+                case "price":
+                    return itemClass.price === sortedCardItem;
+                case "rating":
+                    return itemClass.rating.rate === sortedCardItem;
+                default:
+                    return null;
+            }
+        });
+    });
+    const sortedItemOutputs = sortedItems.map((sortedCard) => sortedCard[0].createCard());
+    itemSection.innerHTML = "";
+    sortedItemOutputs.map((sortedItemOutput) => (itemSection.innerHTML += sortedItemOutput));
+};
+const sortBtns = document.querySelectorAll(".sort-btn");
+const sortBtnsArray = Array.from(sortBtns);
+sortBtnsArray.map((sortBtn, index) => {
+    sortBtn.addEventListener("click", () => {
+        switch (index) {
+            case 0:
+                console.log("=> Name");
+                sortFunction("name");
+                break;
+            case 1:
+                console.log("=> Price");
+                sortFunction("price");
+                break;
+            case 2:
+                console.log("=> Rating");
+                sortFunction("rating");
+                break;
+            default:
+                break;
         }
     });
 });
