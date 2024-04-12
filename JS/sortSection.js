@@ -52,7 +52,22 @@ const sortItemsFunc = (sortType, itemPosition) => {
             }
         });
     });
-    const sortedItemOutputs = sortedItems.map((sortedCard) => sortedCard[0].createCard());
+    console.log("sortedItems >>", sortedItems);
+    const addedIDs = [];
+    const sortedItemOutputs = sortedItems.map((sortedCards) => {
+        let uniqueCard = sortedCards[0];
+        console.log("Before", addedIDs);
+        sortedCards.map((sortedCard) => {
+            if (!addedIDs.includes(sortedCard.id)) {
+                addedIDs.push(sortedCard.id);
+                console.log("After", addedIDs);
+                uniqueCard = sortedCard;
+                return;
+            }
+        });
+        console.log("uniqueCard >>", uniqueCard);
+        return uniqueCard.createCard();
+    });
     itemSection.innerHTML = "";
     sortedItemOutputs.map((sortedItemOutput) => (itemSection.innerHTML += sortedItemOutput));
 };

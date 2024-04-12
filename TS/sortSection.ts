@@ -68,11 +68,31 @@ const sortItemsFunc = (
             }
         });
     });
-    // console.log("sortedItems >>", sortedItems);
+    console.log("sortedItems >>", sortedItems);
 
-    const sortedItemOutputs = sortedItems.map((sortedCard) =>
-        sortedCard[0].createCard()
-    );
+    const addedIDs: number[] = [];
+
+    const sortedItemOutputs = sortedItems.map((sortedCards) => {
+        let uniqueCard = sortedCards[0];
+
+        console.log("Before", addedIDs);
+
+        sortedCards.map((sortedCard) => {
+            if (!addedIDs.includes(sortedCard.id)) {
+                addedIDs.push(sortedCard.id);
+
+                console.log("After", addedIDs);
+
+                uniqueCard = sortedCard;
+                return;
+            }
+        });
+
+        console.log("uniqueCard >>", uniqueCard);
+
+        return uniqueCard.createCard();
+        // return uniqueCard;
+    });
     // console.log("sortedItemOutputs >>", sortedItemOutputs);
 
     itemSection.innerHTML = "";

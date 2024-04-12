@@ -32,7 +32,7 @@ class Items implements Iitem {
             <div class="item-box">
                 <img class="item-image" src="${this.image}" alt="item-image" />
 
-                <div class="item-title" title=${this.title}>${this.title}</div>
+                <div class="item-title" title="${this.title}">${this.title}</div>
 
                 <div class="item-info">
                     <div class="item-price">${this.price} $</div>
