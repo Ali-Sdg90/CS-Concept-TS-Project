@@ -54,22 +54,25 @@ const sortItemsFunc = (sortType, itemPosition) => {
     });
     console.log("sortedItems >>", sortedItems);
     const addedIDs = [];
-    const sortedItemOutputs = sortedItems.map((sortedCards) => {
-        let uniqueCard = sortedCards[0];
-        console.log("Before", addedIDs);
-        sortedCards.map((sortedCard) => {
-            if (!addedIDs.includes(sortedCard.id)) {
-                addedIDs.push(sortedCard.id);
-                console.log("After", addedIDs);
-                uniqueCard = sortedCard;
-                return;
+    const sortedItemOutputs = sortedItems.map((sortedItem) => {
+        return sortedItem.map((item) => {
+            if (!addedIDs.includes(item.id)) {
+                addedIDs.push(item.id);
+                return item;
+            }
+            else {
+                return null;
             }
         });
-        console.log("uniqueCard >>", uniqueCard);
-        return uniqueCard.createCard();
     });
     itemSection.innerHTML = "";
-    sortedItemOutputs.map((sortedItemOutput) => (itemSection.innerHTML += sortedItemOutput));
+    sortedItemOutputs.map((sortedItemOutput) => {
+        sortedItemOutput.map((item) => {
+            if (item !== null) {
+                itemSection.innerHTML += item.createCard();
+            }
+        });
+    });
 };
 const sortBtnPositionHandler = (itemPosition, sortArrowIndex) => {
     if (itemPosition === 3) {

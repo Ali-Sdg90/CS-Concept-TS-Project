@@ -16,3 +16,21 @@ body {
     font-family: sans-serif;
     user-select: none;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+
+    &-track {
+        background: #222;
+        outline: 3px solid #222;
+    }
+
+    &-thumb {
+        background: #606060;
+        border-radius: 8px;
+
+        &:hover {
+            background: #858585;
+        }
+    }
+}
